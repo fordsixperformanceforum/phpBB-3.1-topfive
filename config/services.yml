@@ -8,6 +8,7 @@ services:
             - @content.visibility
             - @dbal.conn
             - @dispatcher
+            - @language
             - @template
             - @user
             - %core.root_path%
@@ -19,6 +20,6 @@ services:
             - @rmcgirr83.topfive.functions
             - @config
             - @template
-            - @user
+            - @language
         tags:
             - { name: event.listener }

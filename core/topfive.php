@@ -30,6 +30,9 @@ class topfive
 
 	/** @var \phpbb\event\dispatcher_interface */
 	protected $dispatcher;
+	
+	/** @var \phpbb\language\language */
+	protected $lang;	
 
 	/** @var \phpbb\template\template */
 	protected $template;
@@ -43,7 +46,7 @@ class topfive
 	/** @var string PHP extension */
 	protected $php_ext;
 
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\cache\service $cache, \phpbb\content_visibility $content_visibility, \phpbb\db\driver\driver_interface $db, \phpbb\event\dispatcher_interface $dispatcher, \phpbb\template\template $template, \phpbb\user $user, $phpbb_root_path, $php_ext)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\cache\service $cache, \phpbb\content_visibility $content_visibility, \phpbb\db\driver\driver_interface $db, \phpbb\event\dispatcher_interface $dispatcher, \phpbb\language\language $lang, \phpbb\template\template $template, \phpbb\user $user, $phpbb_root_path, $php_ext)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
@@ -51,6 +54,7 @@ class topfive
 		$this->content_visibility = $content_visibility;
 		$this->db = $db;
 		$this->dispatcher = $dispatcher;
+		$this->lang = $lang;
 		$this->template = $template;
 		$this->user = $user;
 		$this->root_path = $phpbb_root_path;
@@ -154,7 +158,7 @@ class topfive
 					$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.$this->php_ext", 'f=' . $row['forum_id'] . '&amp;p=' . $row['topic_last_post_id'] . '#p' . $row['topic_last_post_id']);
 					$forum_name_url = append_sid("{$this->phpbb_root_path}viewforum.$this->php_ext", 'f=' . $row['forum_id']);
 					$topic_title = censor_text($row['topic_title']);
-					$topic_title = truncate_string($topic_title, 60, 255, false, $this->user->lang['ELLIPSIS']);
+					$topic_title = truncate_string($topic_title, 60, 255, false, $this->lang->lang('ELLIPSIS'));
 
 					$is_guest = ($row['user_id'] == ANONYMOUS) ? true : false;
 
@@ -162,7 +166,7 @@ class topfive
 						'U_TOPIC'			=> $view_topic_url,
 						'U_FORUM'			=> $forum_name_url,
 						'S_UNREAD'			=> ($post_unread) ? true : false,
-						'USERNAME_FULL'		=> ($is_guest || !$this->auth->acl_get('u_viewprofile')) ? $this->user->lang['POST_BY_AUTHOR'] . ' ' . get_username_string('no_profile', $row['user_id'], $row['username'], $row['user_colour'], $row['topic_last_poster_name']) : $this->user->lang['POST_BY_AUTHOR'] . ' ' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
+						'USERNAME_FULL'		=> ($is_guest || !$this->auth->acl_get('u_viewprofile')) ? $this->lang->lang('POST_BY_AUTHOR') . ' ' . get_username_string('no_profile', $row['user_id'], $row['username'], $row['user_colour'], $row['topic_last_poster_name']) : $this->lang->lang('POST_BY_AUTHOR') . ' ' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 						'LAST_TOPIC_TIME'	=> $this->user->format_date($row['topic_last_post_time']),
 						'TOPIC_TITLE' 		=> $topic_title,
 						'FORUM_NAME'		=> $forum_name,
@@ -185,14 +189,14 @@ class topfive
 			else
 			{
 				$this->template->assign_block_vars($tpl_loopname, array(
-					'NO_TOPIC_TITLE'	=> $this->user->lang['NO_TOPIC_EXIST'],
+					'NO_TOPIC_TITLE'	=> $this->lang->lang('NO_TOPIC_EXIST'),
 				));
 			}
 		}
 		else
 		{
 			$this->template->assign_block_vars($tpl_loopname, array(
-				'NO_TOPIC_TITLE'	=> $this->user->lang['NO_TOPIC_EXIST'],
+				'NO_TOPIC_TITLE'	=> $this->lang->lang('NO_TOPIC_EXIST'),
 			));
 		}
 	}

@@ -28,15 +28,15 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var \phpbb\user */
-	protected $user;
+	/** @var \phpbb\language\language */
+	protected $lang;
 
-	public function __construct(\rmcgirr83\topfive\core\topfive $functions, \phpbb\config\config $config, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\rmcgirr83\topfive\core\topfive $functions, \phpbb\config\config $config, \phpbb\template\template $template, \phpbb\language\language $lang)
 	{
 		$this->functions = $functions;
 		$this->config = $config;
 		$this->template = $template;
-		$this->user = $user;
+		$this->lang = $lang;
 	}
 
 	static public function getSubscribedEvents()
@@ -55,7 +55,7 @@ class listener implements EventSubscriberInterface
 		}
 
 		// add lang file
-		$this->user->add_lang_ext('rmcgirr83/topfive', 'topfive');
+		$this->lang->add_lang('topfive', 'rmcgirr83/topfive');
 
 		$this->functions->topposters();
 		$this->functions->newusers();
