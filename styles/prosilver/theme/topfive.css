@@ -1,12 +1,6 @@
-.tf-new-posts {
-	text-align: left;
-	font-style: bold;
-	font-size: 1.2em;
-}
-
 dd.tf-most-active {
-	font-size: 1.2em;
-	line-height: 1.2em;
+	font-size: 1.1em;
+	line-height: 1.1em;
 	text-align: left;
 	width: 185px;
 	margin-top: -5px;
@@ -17,8 +11,7 @@ dd.tf-most-active {
 }
 
 dd.tf-newest {
-	font-size: 1.2em;
-	line-height: 1.2em;
+	line-height: 1.1em;
 	text-align: left;
 	margin-top: -5px;
 }
@@ -55,10 +48,6 @@ dd.tf-active-header {
 #top_five .meta {
 	display: block;
 	padding-left: 8px;
-}
-
-#top_five .meta span {
-	font-size: .9em;
 }
 
 .rtl #top_five {
