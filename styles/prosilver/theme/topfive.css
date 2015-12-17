@@ -3,7 +3,6 @@ dd.tf-most-active {
 	line-height: 1.1em;
 	text-align: left;
 	width: 185px;
-	margin-top: -5px;
 }
 
 .rtl dd.tf-most-active  {
@@ -13,7 +12,6 @@ dd.tf-most-active {
 dd.tf-newest {
 	line-height: 1.1em;
 	text-align: left;
-	margin-top: -5px;
 }
 
 .rtl dd.tf-newest {
