@@ -79,7 +79,7 @@ class topfive
 		$forum_ary = array_unique($forum_ary);
 
 		// want to exclude some forums
-		$excluded_forums = explode(', ', $this->config['top_five_excluded']);
+		$excluded_forums = explode(',', $this->config['top_five_excluded']);
 
 		// now remove those topics from the display per the excluded forums array
 		$forum_ary = array_diff($forum_ary, $excluded_forums);
@@ -100,7 +100,7 @@ class topfive
 		$sql_array = array(
 			'SELECT'	=> 't.forum_id, t.topic_id, t.topic_type',
 			'FROM'		=> array(TOPICS_TABLE => 't'),
-			'WHERE'		=> $this->content_visibility->get_forums_visibility_sql('topic', $forum_ary) . 'AND topic_status <> ' . ITEM_MOVED,
+			'WHERE'		=> $this->content_visibility->get_forums_visibility_sql('topic', $forum_ary) . ' AND topic_status <> ' . ITEM_MOVED,
 			'ORDER_BY'	=> 't.topic_last_post_time DESC',
 		);
 
