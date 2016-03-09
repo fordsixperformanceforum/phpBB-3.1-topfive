@@ -30,7 +30,7 @@ class topfive
 
 	/** @var \phpbb\event\dispatcher_interface */
 	protected $dispatcher;
-
+	
 	/** @var \phpbb\language\language */
 	protected $lang;
 

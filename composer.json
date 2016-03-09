@@ -4,7 +4,7 @@
 	"description": "Displays statistics of the latest new posts, new users and most active users on the boards index page.",
 	"homepage": "https://github.com/RMcGirr83/topfive",
 	"version": "1.1.0",
-	"time": "2015-12-24",
+	"time": "2016-03-09",
     "keywords": [
         "phpbb",
         "extension",
@@ -24,7 +24,7 @@
 	"extra": {
 		"display-name": "Top Five",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.2.*@dev,<3.3.*@dev"
+			"phpbb/phpbb": ">=3.2.0,<3.3.0"
 		},
 		"version-check": {
 			"host": "www.phpbb.com",

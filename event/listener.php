@@ -31,12 +31,22 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\language\language */
 	protected $lang;
 
-	public function __construct(\rmcgirr83\topfive\core\topfive $functions, \phpbb\config\config $config, \phpbb\template\template $template, \phpbb\language\language $lang)
+	/** @var \phpbb\controller\helper */
+	protected $helper;
+	public function __construct(
+		\rmcgirr83\topfive\core\topfive $functions,
+		\phpbb\config\config $config,
+		\phpbb\template\template $template,
+		\phpbb\language\language $lang,
+		\phpbb\controller\helper $helper,
+		\phpbb\collapsiblecategories\operator\operator $operator = null)
 	{
 		$this->functions = $functions;
 		$this->config = $config;
 		$this->template = $template;
 		$this->lang = $lang;
+		$this->helper = $helper;
+		$this->operator = $operator;
 	}
 
 	static public function getSubscribedEvents()
@@ -60,7 +70,16 @@ class listener implements EventSubscriberInterface
 		$this->functions->topposters();
 		$this->functions->newusers();
 		$this->functions->toptopics();
-
+		if ($this->operator !== null)
+		{
+			$fid = 'topfive'; // can be any unique string to identify your extension's collapsible element
+			$this->template->assign_vars(array(
+				'S_TOPFIVE_HIDDEN' => in_array($fid, $this->operator->get_user_categories()),
+				'U_TOPFIVE_COLLAPSE_URL' => $this->helper->route('phpbb_collapsiblecategories_main_controller', array(
+					'forum_id' => $fid,
+					'hash' => generate_link_hash("collapsible_$fid")))
+			));
+		}
 		$this->template->assign_vars(array(
 			'S_TOPFIVE'	=>	$this->config['top_five_active'],
 			'S_TOPFIVE_LOCATION'	=> $this->config['top_five_location'],
