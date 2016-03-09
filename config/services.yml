@@ -2,26 +2,26 @@ services:
     rmcgirr83.topfive.functions:
         class: rmcgirr83\topfive\core\topfive
         arguments:
-            - @auth
-            - @config
-            - @cache
-            - @content.visibility
-            - @dbal.conn
-            - @dispatcher
-            - @language
-            - @template
-            - @user
-            - %core.root_path%
-            - %core.php_ext%
+            - '@auth'
+            - '@config'
+            - '@cache'
+            - '@content.visibility'
+            - '@dbal.conn'
+            - '@dispatcher'
+            - '@language'
+            - '@template'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     rmcgirr83.topfive.listener:
         class: rmcgirr83\topfive\event\listener
         arguments:
-            - @rmcgirr83.topfive.functions
-            - @config
-            - @template
-            - @language
-            - @controller.helper
-            - @?phpbb.collapsiblecategories.operator
+            - '@rmcgirr83.topfive.functions'
+            - '@config'
+            - '@template'
+            - '@language'
+            - '@controller.helper'
+            - '@?phpbb.collapsiblecategories.operator'
         tags:
             - { name: event.listener }

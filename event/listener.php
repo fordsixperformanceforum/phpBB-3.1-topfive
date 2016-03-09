@@ -33,6 +33,7 @@ class listener implements EventSubscriberInterface
 
 	/** @var \phpbb\controller\helper */
 	protected $helper;
+
 	public function __construct(
 		\rmcgirr83\topfive\core\topfive $functions,
 		\phpbb\config\config $config,
